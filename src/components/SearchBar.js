@@ -14,4 +14,8 @@ const SearchBar = ({keyword, keywordChange}) => {
     )
 }
 
+SearchBar.propTypes = {
+    keyword: PropTypes.string.isRequired,
+}
+
 export default SearchBar;

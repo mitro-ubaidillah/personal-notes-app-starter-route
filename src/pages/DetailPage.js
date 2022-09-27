@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import DetailNote from "../components/DetailNote";
-import { getNote, deleteNote } from "../utils/local-data";
+import { getNote, deleteNote, archiveNote, unarchiveNote } from "../utils/local-data";
 
 function DetailPageWrapper() {
     const {id} = useParams();
@@ -12,7 +12,17 @@ function DetailPageWrapper() {
         navigate('/');
     }
 
-    return <DetailPage id={id} onDelete={onDelete}/>;
+    function onArchive(id){
+        archiveNote(id);
+        navigate('/');
+    }
+
+    function unArchive(id){
+        unarchiveNote(id);
+        navigate('/');
+    }
+
+    return <DetailPage id={id} onDelete={onDelete} onArchive={onArchive} unArchive={unArchive}/>;
 }
 
 class DetailPage extends React.Component {
@@ -22,6 +32,8 @@ class DetailPage extends React.Component {
         this.state = {
             note : getNote(props.id),
             onDelete : props.onDelete,
+            onArchive : props.onArchive,
+            unArchive : props.unArchive,
         };
     }
 
@@ -36,10 +48,12 @@ class DetailPage extends React.Component {
 
         return (
             <section className="detail-page">
-                <DetailNote {...this.state.note} onDelete={this.state.onDelete}/>
+                <DetailNote {...this.state.note} onDelete={this.state.onDelete} onArchive={this.state.onArchive} unArchive={this.state.unArchive} />
             </section>
         )
     }
 }
+
+
 
 export default DetailPageWrapper;

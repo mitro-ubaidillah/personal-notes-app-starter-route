@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 function NoteList({notes}){
     return (
+            notes.length ? 
             <section className="notes-list">
                 {
                     notes.map((note) => (
@@ -14,6 +15,9 @@ function NoteList({notes}){
                         {...note} />
                     ))
                 }
+            </section> : 
+            <section className="notes-list-empty">
+                <p className="notes-list__empty">Tidak ada catatan</p>
             </section>
     );
 }

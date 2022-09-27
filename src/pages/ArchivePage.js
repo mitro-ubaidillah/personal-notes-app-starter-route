@@ -1,11 +1,10 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
-import { getActiveNotes } from "../utils/local-data";
+import { getArchivedNotes } from "../utils/local-data";
 import SearchBar from "../components/SearchBar";
 import NoteList from "../components/NoteList";
-import AddButton from "../components/AddButton";
 
-function HomePageWrapper() {
+function ArchivePageWrapper() {
     const [searchParams, setSearchParams] = useSearchParams();
 
     const keyword = searchParams.get('keyword');
@@ -14,16 +13,16 @@ function HomePageWrapper() {
         setSearchParams({keyword});
     }
 
-    return <HomePage defaultKeyword={keyword} keyword={changeSeachParams} />
+    return <ArchivePage defaultKeyword={keyword} keyword={changeSeachParams} />
 
 }
 
-class HomePage extends React.Component {
+class ArchivePage extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            notes: getActiveNotes(),
+            notes: getArchivedNotes(),
             keyword: props.defaultKeyword || '',
         }
 
@@ -43,20 +42,19 @@ class HomePage extends React.Component {
     render() {
         const notes = this.state.notes.filter((note) => {
             return note.title.toLocaleLowerCase().includes(
-                this.state.keyword.toLocaleLowerCase(),
+                this.state.keyword.toLocaleLowerCase()
             )
         });
 
         return (
             <section className="homepage">
-                <h2>Catatan Aktif</h2>
+                <h2>Catatan Arsip</h2>
                 <SearchBar keyword={this.state.keyword} keywordChange={this.onKeywordChangeHandler} />
                 <NoteList notes={notes} />
-                <AddButton />
             </section>
         )
     }
     
 }
 
-export default HomePageWrapper;
+export default ArchivePageWrapper;
