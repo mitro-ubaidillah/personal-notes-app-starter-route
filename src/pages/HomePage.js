@@ -4,8 +4,9 @@ import { getActiveNotes } from "../utils/local-data";
 import SearchBar from "../components/SearchBar";
 import NoteList from "../components/NoteList";
 import AddButton from "../components/AddButton";
+import PropTypes from "prop-types";
 
-function HomePageWrapper() {
+const HomePageWrapper = () => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     const keyword = searchParams.get('keyword');
@@ -36,8 +37,6 @@ class HomePage extends React.Component {
                 keyword,
             }
         });
-
-        this.props.keywordChange(keyword);
     }
 
     render() {
@@ -46,6 +45,10 @@ class HomePage extends React.Component {
                 this.state.keyword.toLocaleLowerCase(),
             )
         });
+
+        if(!notes) {
+            return <h1>404 page not found</h1>
+        }
 
         return (
             <section className="homepage">
@@ -58,5 +61,11 @@ class HomePage extends React.Component {
     }
     
 }
+
+HomePage.propTypes = {
+    defaultKeyword: PropTypes.string,
+    keywordChange: PropTypes.func
+}
+
 
 export default HomePageWrapper;

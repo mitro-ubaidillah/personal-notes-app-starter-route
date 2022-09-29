@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 
 
-function NoteItem({title, createdAt, body, id}){
+const NoteItem = ({title, createdAt, body, id}) => {
     return (
         <article className="note-item">
             <h3 className="note-item__title">
@@ -20,7 +20,8 @@ function NoteItem({title, createdAt, body, id}){
 NoteItem.propTypes = {
     title: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
-    body: PropTypes.string.isRequired
+    body: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
 }
 
 export default NoteItem;

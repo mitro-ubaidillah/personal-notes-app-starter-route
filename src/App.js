@@ -6,8 +6,9 @@ import ArchivePage from './pages/ArchivePage';
 import { Link } from 'react-router-dom';
 import DetailPage from './pages/DetailPage';
 import AddPage from './pages/AddPage';
+import NotFoundPage from './pages/404Page';
 
-function App() {
+const App = () => {
   return (
     <div className="app-container">
       <header>
@@ -20,6 +21,7 @@ function App() {
           <Route path='/archives' element={<ArchivePage />} />
           <Route path='/notes/:id' element={<DetailPage />} />
           <Route path='/add' element={<AddPage />} />
+          <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </main>
     </div>

@@ -269,6 +269,11 @@ main {
   color: var(--on-background);
 }
 
+.not-found-page {
+  text-align: center;
+  font-size: 2rem;
+}
+
 @media screen and (min-width: 650px) {
   .notes-list {
     grid-template-columns: repeat(2, 1fr);

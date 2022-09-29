@@ -3,13 +3,14 @@ import { useSearchParams } from "react-router-dom";
 import { getArchivedNotes } from "../utils/local-data";
 import SearchBar from "../components/SearchBar";
 import NoteList from "../components/NoteList";
+import PropTypes from "prop-types";
 
-function ArchivePageWrapper() {
+const ArchivePageWrapper = () => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     const keyword = searchParams.get('keyword');
 
-    function changeSeachParams(keyword) {
+    const changeSeachParams = (keyword) => {
         setSearchParams({keyword});
     }
 
@@ -35,10 +36,9 @@ class ArchivePage extends React.Component {
                 keyword,
             }
         });
-
-        this.props.keywordChange(keyword);
+        
     }
-
+    
     render() {
         const notes = this.state.notes.filter((note) => {
             return note.title.toLocaleLowerCase().includes(
@@ -55,6 +55,11 @@ class ArchivePage extends React.Component {
         )
     }
     
+}
+
+ArchivePage.propTypes = {
+    defaultKeyword: PropTypes.string,
+    keywordChange: PropTypes.func
 }
 
 export default ArchivePageWrapper;

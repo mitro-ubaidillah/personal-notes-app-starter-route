@@ -2,7 +2,7 @@ import React from "react";
 import NoteItem from "./NoteItem";
 import PropTypes from 'prop-types';
 
-function NoteList({notes}){
+const NoteList = ({notes}) => {
     return (
             notes.length ? 
             <section className="notes-list">
